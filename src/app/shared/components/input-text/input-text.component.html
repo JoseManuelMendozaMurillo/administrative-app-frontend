@@ -1,0 +1,45 @@
+<label
+  [for]="id()"
+  ngClass='text-gray-900 dark:text-white'
+  class="block mb-2 text-sm font-medium transition-all duration-400 ease-in-out"
+>
+  {{ this.label() }}
+</label>
+<div class="relative">
+  <div
+    class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none transition-all duration-400 ease-in-out"
+    >
+    <ng-container 
+      [ngComponentOutlet]="this.icon()"
+      [ngComponentOutletInputs]="{class: this.iconClass()}"
+      >
+    </ng-container>
+  </div>
+  <input
+    [type]="this.inputType()"
+    [id]="this.id()"
+    [name]="this.name()"
+    [placeholder]="this.placeHolder()"
+    [formControl]="this.control!"
+    [ngClass]="{
+      'bg-gray-50 border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500':
+        this.control.pristine,
+      'bg-green-50 border-green-500 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-green-500':
+        !this.control.pristine && isValidField(),
+      'bg-red-50  border-red-500 focus:ring-red-500 dark:bg-gray-700 focus:border-red-500  dark:border-red-500':
+        !this.control.pristine && !isValidField()
+    }"
+    class="border text-sm rounded-lg block w-full ps-10 p-2.5 transition-all duration-400 ease-in-out"
+  />
+</div>
+@if(this.isValidField() !== undefined){ 
+  @if(this.isValidField()){
+    <p class="mt-2 text-sm text-green-600 dark:text-green-500 transition-all duration-400 ease-in-out">
+      {{ this.successMessage() }}
+    </p>
+  }@else{
+    <p class="mt-2 text-sm text-red-600 dark:text-red-500 transition-all duration-400 ease-in-out">
+      {{ this.errorMessage() }}
+    </p>
+  } 
+}
