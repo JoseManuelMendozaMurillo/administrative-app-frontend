@@ -59,7 +59,7 @@ export class DefaultControlValueAccessorDirective<T> implements ControlValueAcce
   }
 
   /* HELPERS */
-  private initControl(): void {
+  protected initControl(): void {
     try{
       const ngControl: NgControl | null = this.injector.get(NgControl, null);
 

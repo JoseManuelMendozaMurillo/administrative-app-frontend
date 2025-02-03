@@ -2,7 +2,7 @@ import { InputSignal, Type } from "@angular/core";
 import { BaseIconComponent } from "../icons/base-icon/base-icon.component";
 import { InputTypes } from "../types/InputTypes.type";
 
-export interface InputComponentProperties {
+export interface InputComponentInterface {
     inputType: InputSignal<InputTypes>;
     id: InputSignal<string>;
     name: InputSignal<string>;
@@ -10,6 +10,6 @@ export interface InputComponentProperties {
     placeHolder: InputSignal<string>;
 }
 
-export interface InputTextIconComponent extends InputComponentProperties {
-    icon: InputSignal<Type<BaseIconComponent>>;
+export interface InputTextIconComponentInterface<T extends BaseIconComponent> extends InputComponentInterface {
+    icon: InputSignal<Type<T>>;
 }

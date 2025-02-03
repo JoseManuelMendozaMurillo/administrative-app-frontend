@@ -1,17 +1,26 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, input, InputSignal, Signal, signal } from '@angular/core';
 import { BaseIconComponent } from '../../base-icon/base-icon.component';
-import { Path } from '../../../interfaces/icon-component.interface';
+import { IconComponentInterface, Path } from '../../../interfaces/icon-component.interface';
 
 @Component({
   selector: 'solid-lock-closed-icon',
   standalone: true,
   imports: [BaseIconComponent],
   template: `
-      <base-svg-icon [paths]="this.lockClosedIcon()" [class]="this.customClass()" [viewBox]="this.customViewBox()"/>
+      <base-svg-icon 
+        [paths]="this.lockClosedIcon()" 
+        [classList]="this.class() + ' ' + this.colorClass()" 
+        [viewBox]="this.customViewBox()"
+      />
   `,
   styles: ``
 })
-export class LockClosedIconComponent extends BaseIconComponent {
+export class LockClosedIconComponent extends BaseIconComponent implements IconComponentInterface {
+
+
+  public class: InputSignal<string> = input<string>('size-5');
+  public colorClass: InputSignal<string> = input<string>('text-gray-500 dark:text-gray-400');
+  public customViewBox: Signal<string> = signal('0 0 24 24');
 
   public lockClosedIcon: Signal<Path[]> = signal([
     this.buildPath(
@@ -21,6 +30,5 @@ export class LockClosedIconComponent extends BaseIconComponent {
     )
   ]);
 
-  public customClass: Signal<string> = signal('size-5 text-gray-500 dark:text-gray-400');
-  public customViewBox: Signal<string> = signal('0 0 24 24');
+
 }

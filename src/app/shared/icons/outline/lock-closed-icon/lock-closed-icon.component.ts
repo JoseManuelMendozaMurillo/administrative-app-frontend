@@ -1,6 +1,6 @@
-import { Component, Signal, signal } from '@angular/core';
+import { Component, input, InputSignal, Signal, signal } from '@angular/core';
 import { BaseIconComponent } from '../../base-icon/base-icon.component';
-import { Path } from '../../../interfaces/icon-component.interface';
+import { IconComponentInterface, Path } from '../../../interfaces/icon-component.interface';
 
 @Component({
   selector: 'outline-lock-closed-icon',
@@ -9,7 +9,7 @@ import { Path } from '../../../interfaces/icon-component.interface';
   template: `
     <base-svg-icon  
       [paths]="this.lockClosedIcon()" 
-      [class]="this.customClass()" 
+      [classList]="this.class() + ' ' + this.colorClass()" 
       [viewBox]="this.customViewBox()"
       [fill]="this.customFill()"
       [stroke]="this.customStroke()"
@@ -22,14 +22,17 @@ import { Path } from '../../../interfaces/icon-component.interface';
   `,
   styles: ``
 })
-export class LockClosedIconComponent extends BaseIconComponent {
-  public lockClosedIcon: Signal<Path[]> = signal([
-    this.buildPath('M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z')
-  ]);
+export class LockClosedIconComponent extends BaseIconComponent implements IconComponentInterface {
+  
+  public class: InputSignal<string> = input<string>('size-5');
+  public colorClass: InputSignal<string> = input<string>('text-gray-500 dark:text-gray-400');
 
-  public customClass: Signal<string> = signal('size-5');
   public customViewBox: Signal<string> = signal('0 0 24 24');
   public customFill: Signal<string> = signal('none');
   public customStrokeWidth: Signal<string> = signal('1.5');
   public customStroke: Signal<string> = signal('currentColor');
+
+  public lockClosedIcon: Signal<Path[]> = signal([
+    this.buildPath('M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z')
+  ]);  
 }

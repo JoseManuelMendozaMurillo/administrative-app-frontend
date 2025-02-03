@@ -1,17 +1,20 @@
-import { Component, input, InputSignal, NO_ERRORS_SCHEMA, OnInit, Signal, signal } from '@angular/core';
+import { Component, Input, input, InputSignal, NO_ERRORS_SCHEMA, OnInit, Signal, signal } from '@angular/core';
 import { BaseIconComponent } from '../../base-icon/base-icon.component';
-import { Path } from '../../../interfaces/icon-component.interface';
+import { IconComponentInterface, Path } from '../../../interfaces/icon-component.interface';
 
 @Component({
   selector: 'solid-email-icon',
   standalone: true,
   imports: [BaseIconComponent],
   template: `
-      <base-svg-icon [paths]="this.emailIcon()"/>
+      <base-svg-icon [paths]="this.emailIcon()" [classList]="this.class() + ' ' + this.colorClass()"/>
   `,
   styles: ``,
 })
-export class EmailIconComponent extends BaseIconComponent{
+export class EmailIconComponent extends BaseIconComponent implements IconComponentInterface{
+  
+  public class: InputSignal<string> = input<string>('w-4 h-4');
+  public colorClass: InputSignal<string> = input<string>('text-gray-500 dark:text-gray-400');
 
   public emailIcon: Signal<Path[]> = signal([
     this.buildPath('M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z'),

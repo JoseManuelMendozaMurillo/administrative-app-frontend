@@ -1,5 +1,5 @@
 import { Component, inject, Type } from '@angular/core';
-import { InputTextComponent } from '../../../shared/components/input-text/input-text.component';
+import { InputTextIconComponent } from '../../../shared/components/inputs/text/input-text-icon/input-text-icon.component';
 import { EmailIconComponent } from '../../../shared/icons/solid/email-icon/email-icon.component';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { LockClosedIconComponent } from '../../../shared/icons/solid/lock-closed-icon/lock-closed-icon.component';
@@ -7,7 +7,7 @@ import { LockClosedIconComponent } from '../../../shared/icons/solid/lock-closed
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [InputTextComponent, EmailIconComponent, ReactiveFormsModule],
+  imports: [InputTextIconComponent, EmailIconComponent, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
